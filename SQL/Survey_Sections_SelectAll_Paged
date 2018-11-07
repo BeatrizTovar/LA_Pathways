@@ -1,0 +1,12 @@
+ALTER PROC SurveySections_SelectAll_Paged
+
+@PageIndex int, 
+@PageSize int 
+
+AS
+
+SELECT Id, Survey, Title, Description, SortOrder, DateCreated, DateModified, COUNT (*) OVER () as TotalCount
+FROM SurveySections 
+
+ORDER BY Id
+OFFSET (@PageIndex * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY 
