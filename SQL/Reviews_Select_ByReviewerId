@@ -1,0 +1,16 @@
+ALTER PROC Reviews_Select_ByReviewerId
+
+@ReviewerId int
+
+AS
+
+SELECT A.Id, A.ReviewerId, A.UserId, A.Comments, A.StarRating, A.DateOfInteraction, A.InteractionTypeId, A.IsVisibleByMentor, A.DateCreated,
+B.FirstName, B.LastName, C.ImageUrl
+
+FROM Reviews as A 
+INNER JOIN Users As B
+ON A.UserId = B.Id
+INNER JOIN UserProfileInfos as C
+ON B.Id = C.UserId 
+
+WHERE ReviewerId = @ReviewerId
